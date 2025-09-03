@@ -1,3 +1,6 @@
+from Funciones import buscar_producto_por_id,eliminar_producto_por_id
+
+
 #Ejercicio de la tienda
 Opcion_del_menu=150
 almacen_producto=[]
@@ -5,7 +8,6 @@ almacen_producto=[]
 print("---Bodega Online------>")
 print("***********************")
 while Opcion_del_menu != 0:
-    
     print("1.Registrar un Producto a la APP")
     print("2.Mostrar productos en Bodega")
     print("3.Valorar bodega")
@@ -20,24 +22,34 @@ while Opcion_del_menu != 0:
     elif Opcion_del_menu==1:
         #Debo crear un diccionario desde 0
         #para almacenar la info de un producto
-        producto={}
+        productos={}
         print("A Continuacion ingresa un Producto a nuestra APP")
-        producto["identificacion"]=input("Digita el ID del producto a registra: ")
-        producto["nombre"]=input("Ingesa el nombre del Producto: ")
-        producto["descripcion"]=input("Cuentanos acerca del Producto: ")
-        producto["fotografia"]=input("Ingresa la URL de la fotografia del Producto: ")
-        producto["precio_unitario"]=float(input("digita el precio unitario del producto: "))
-        producto["cantidad_en_bodega"]=int(input("Ingresa la cantidad de los productos en bodega: ")) 
+        productos["identificacion"]=int(input("Digita el ID del producto a registra: "))
+        productos["nombre"]=input("Ingesa el nombre del Producto: ")
+        productos["descripcion"]=input("Cuentanos acerca del Producto: ")
+        productos["fotografia"]=input("Ingresa la URL de la fotografia del Producto: ")
+        productos["precio_unitario"]=float(input("digita el precio unitario del producto: "))
+        productos["cantidad_en_bodega"]=int(input("Ingresa la cantidad de los productos en bodega: ")) 
         print("Producto Agregado satisfactoriamente")
-        almacen_producto.append(producto) 
+        almacen_producto.append(productos) 
     elif Opcion_del_menu==2:
         for productoSeleccionado in almacen_producto:
-            print(f"Producto: {productoSeleccionado==producto["nombre"]}-\n precio:{productoSeleccionado==producto["precio_unitario"]}")
+            print(productoSeleccionado)
+            
     elif Opcion_del_menu==3:
         pass
     elif Opcion_del_menu==4:
-        pass
+        print("Buscando un producto por ID")
+        id_buscado=int(input("Digita el id del producto que quieres Buscar: "))
+        producto_encontrado=eliminar_producto_por_id(productos,id_buscado)
+        print(producto_encontrado)
+        #Si el producto encontrado es NONE, devolver un mensaje de que el producto no es encontrado
+
     elif Opcion_del_menu==5:
-        pass
+       print("Elimina un producto: ")
+       id_buscado=int(input("Ingresa el ID del producto a eliminar: "))
+       if eliminar_producto_por_id(productos,id_buscado):
+        print(f"producto{productos.get("nombre")} eliminado")
+       else: print("No pudimos encontrar tu producto")
     else:
         print("Opcion Incorrecta, ingresa una opcion valida")
